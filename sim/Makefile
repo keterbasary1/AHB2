@@ -23,23 +23,28 @@ elab:
 comp:
 	vlog -work $(WORK) $(INC) $(RTL) $(PKG) $(TOP)
 
-run_gui:clean lib cmp
+run_gui:
+		clean lib cmp
         vsim -coverage -novopt -sva -sv_seed 3311333501 -l test4_sim.log work.top +UVM_TESTNAME=w4busy_test
         vcover report -html cov
 
-run_test1: clean lib cmp
+run_test1:
+		clean lib cmp
         vsim $(VSIMBATCH1) -coverage -novopt -sva -sv_seed random -l test1_sim.log work.top +UVM_TESTNAME=reset_test
         vcover report -html cov1
 
-run_test2: clean lib cmp
+run_test2:
+		clean lib cmp
         vsim $(VSIMBATCH2) -coverage -novopt -sva -sv_seed random -l test2_sim.log work.top +UVM_TESTNAME=inc4_test
         vcover report -html cov2
 
-run_test3: clean lib cmp
+run_test3:
+		clean lib cmp
         vsim $(VSIMBATCH3) -coverage -novopt -sva -sv_seed random -l test3_sim.log work.top +UVM_TESTNAME=crt_test
         vcover report -html cov3
 
-run_test4: clean lib cmp
+run_test4: 
+		clean lib cmp
         vsim $(VSIMBATCH4) -coverage -novopt -sva -sv_seed random -l test4_sim.log work.top +UVM_TESTNAME=w4busy_test
         vcover report -html cov4
 clean: 
