@@ -17,7 +17,7 @@ VSIMBATCH4 = -c -do "coverage save -onexit -assert -directive -cvg -codeAll cov4
 
 
 elab:
-    vlib $(WORK)
+	vlib $(WORK)
 	vmap work $(WORK)
 
 comp:
