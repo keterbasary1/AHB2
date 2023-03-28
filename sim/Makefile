@@ -16,14 +16,14 @@ VSIMBATCH3 = -c -do "coverage save -onexit -assert -directive -cvg -codeAll cov3
 VSIMBATCH4 = -c -do "coverage save -onexit -assert -directive -cvg -codeAll cov4; run -all; exit"
 
 
-lib:
-        vlib $(WORK)
-        vmap work $(WORK)
+elab:
+    vlib $(WORK)
+	vmap work $(WORK)
 
-cmp:
-        vlog -work $(WORK) $(INC) $(RTL) $(PKG) $(TOP)
+comp:
+	vlog -work $(WORK) $(INC) $(RTL) $(PKG) $(TOP)
 
-run_gui: clean lib cmp
+run_gui:clean lib cmp
         vsim -coverage -novopt -sva -sv_seed 3311333501 -l test4_sim.log work.top +UVM_TESTNAME=w4busy_test
         vcover report -html cov
 
@@ -43,6 +43,6 @@ run_test4: clean lib cmp
         vsim $(VSIMBATCH4) -coverage -novopt -sva -sv_seed random -l test4_sim.log work.top +UVM_TESTNAME=w4busy_test
         vcover report -html cov4
 clean: 
-        rm -rf modelsim.* transcript* *log* work vsim.wlf vish_* fcover* covhtml* cov*
-        clear
+	rm -rf modelsim.* transcript* *log* work vsim.wlf vish_* fcover* covhtml* cov*
+	clear
 
